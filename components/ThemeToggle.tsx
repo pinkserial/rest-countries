@@ -103,7 +103,7 @@ export default function ThemeToggle() {
             Dark Mode
           </span>
         </Listbox.Button>
-        <Listbox.Options className="bg-card absolute top-full mt-4 w-full rounded-lg ring-1 ring-slate-900/10 shadow-lg overflow-hidden">
+        <Listbox.Options className="bg-card absolute top-full z-50 mt-4 w-full rounded-lg ring-1 ring-slate-900/10 shadow-lg overflow-hidden">
           {themes.map(({ value, label, icon: Icon }) => (
             <Listbox.Option key={value} value={value} as={Fragment}>
               {({ active, selected }) => (

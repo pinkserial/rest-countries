@@ -16,3 +16,9 @@
   --input: white;
   --card: #2b3945;
 }
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+}
