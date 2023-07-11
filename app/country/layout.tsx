@@ -1,3 +1,7 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+
 function ArrowLeft(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -20,12 +24,15 @@ function ArrowLeft(props: React.SVGProps<SVGSVGElement>) {
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
+
   return (
     <>
       <div className="my-20">
         <button
-          className="px-7 py-2 text-sm rounded-lg shadow-lg bg-card flex items-center gap-1"
+          className="px-10 py-2 text-lg rounded-lg shadow-lg bg-card flex items-center gap-3"
           type="button"
+          onClick={router.back}
         >
           <ArrowLeft />
           Back

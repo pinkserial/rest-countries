@@ -1,5 +1,6 @@
 import { Country } from "@/lib/getCountries";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function CountryCard({
   country: { flag, name, ...props },
@@ -7,10 +8,12 @@ export default function CountryCard({
   country: Country;
 }) {
   return (
-    <figure className="w-full h-full">
-      <Flag src={flag} alt={name} />
-      <Summary name={name} {...props} />
-    </figure>
+    <Link href={`/country/${name}`}>
+      <figure className="w-full h-full">
+        <Flag src={flag} alt={name} />
+        <Summary name={name} {...props} />
+      </figure>
+    </Link>
   );
 }
 

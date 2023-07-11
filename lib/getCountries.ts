@@ -46,3 +46,9 @@ export function getCountriesByPageNum(pageNum: number) {
     hasNext: pageNum < MAX_PAGE_NUM,
   };
 }
+
+export function getBoundaryCountries(borders: string[]) {
+  return borders.map((border) =>
+    countries.find((country) => country.alpha3Code === border)
+  );
+}
