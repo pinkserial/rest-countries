@@ -11,12 +11,12 @@ type Props = {
 const forwardedCountryCardList = forwardRef<HTMLLIElement, Props>(
   function CountryCardList({ countries }, ref) {
     return (
-      <ol className="my-20 grid grid-cols-[repeat(auto-fill,_265px)] justify-between gap-10">
+      <ol className="px-10 md:px-0 my-20 md:my-10 md:grid md:grid-cols-[repeat(auto-fill,_265px)] md:justify-around md:gap-10 lg:gap-5">
         {countries.map((country, idx) => (
           <li
             ref={idx + 1 === countries.length ? ref : null}
             key={country.name}
-            className="rounded-lg bg-card shadow-lg  h-80 overflow-hidden"
+            className="my-16 md:my-0 rounded-lg bg-card shadow-lg h-80 overflow-hidden"
           >
             <CountryCard country={country} />
           </li>

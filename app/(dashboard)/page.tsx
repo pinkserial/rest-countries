@@ -28,7 +28,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="mt-10 h-14 flex justify-between relative">
+      <div className="my-10 md:h-14 md:flex md:justify-between relative">
         <Search />
         <Filter />
       </div>

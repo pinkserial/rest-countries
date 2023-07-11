@@ -23,13 +23,15 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={nunitoSans.className}>
         <ThemeProvider>
-          <nav className="bg-card px-20 h-20 flex justify-between items-center shadow-lg">
+          <nav className="bg-card h-20 flex justify-between items-center shadow-lg px-6 md:px-20">
             <Link href={"/"}>
-              <h1 className="text-2xl font-extrabold">Where in the world?</h1>
+              <h1 className="text-base md:text-2xl font-extrabold">
+                Where in the world?
+              </h1>
             </Link>
             <ThemeToggle />
           </nav>
-          <main className="px-20">{children}</main>
+          <main className="px-5 md:px-20">{children}</main>
         </ThemeProvider>
       </body>
     </html>

@@ -12,8 +12,8 @@ export const Regions = [
 
 export type Region = (typeof Regions)[number];
 
-export function getCountry(name: string) {
-  return countries.find((country) => country.name.includes(name));
+export function getCountry(code: string) {
+  return countries.find((country) => country.alpha2Code === code);
 }
 
 export function searchCountriesByName(name: string) {

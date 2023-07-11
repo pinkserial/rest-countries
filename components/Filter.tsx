@@ -36,13 +36,13 @@ export default function Filter({ region }: { region?: string }) {
 
   return (
     <Listbox value={region} onChange={handleChange}>
-      <Listbox.Button className="rounded-lg w-52 bg-card flex items-center px-5 shadow-lg">
+      <Listbox.Button className="p-5 mt-10 md:mt-0 mx-auto md:mx-0 rounded-lg w-52 bg-card flex items-center shadow-lg">
         <span className="flex-1">
           {capitalize(region || "filter by region")}
         </span>
         <FilterIcon className="h-auto stroke-foreground" />
       </Listbox.Button>
-      <Listbox.Options className="mt-3 absolute w-52 top-full right-0 bg-card rounded-lg ring-1 ring-slate-900/10 shadow-lg overflow-hidden">
+      <Listbox.Options className="mt-3 absolute top-full w-1/2 md:w-52 right-1/4 md:right-0 bg-card rounded-lg ring-1 ring-slate-900/10 shadow-lg overflow-hidden">
         {Regions.map((region) => (
           <Listbox.Option key={region} value={region} as={Fragment}>
             {({ active, selected }) => (

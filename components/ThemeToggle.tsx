@@ -94,12 +94,12 @@ export default function ThemeToggle() {
     <div className="relative">
       <Listbox value={theme} onChange={setTheme}>
         <Listbox.Button className="flex items-center" type="button">
-          <span className="flex dark:hidden justify-center items-center gap-2">
-            <SunIcon className="w-6 h-6" />
+          <span className="flex dark:hidden justify-center items-center gap-2 text-sm md:text-base">
+            <SunIcon className="w-3 h-3 md:w-6 md:h-6" />
             Light Mode
           </span>
-          <span className="hidden dark:flex  justify-center items-center gap-2">
-            <MoonIcon className="w-6 h-6" />
+          <span className="hidden dark:flex  justify-center items-center gap-2 text-sm md:text-base">
+            <MoonIcon className="w-3 h-3 md:w-6 md:h-6" />
             Dark Mode
           </span>
         </Listbox.Button>
@@ -114,8 +114,10 @@ export default function ThemeToggle() {
                     active && "bg-slate-50 dark:bg-slate-600/30"
                   )}
                 >
-                  <Icon className="w-6 h-6" />
-                  <span className="flex-1 text-center ">{label}</span>
+                  <Icon className="w-3 h-3 md:w-6 md:h-6" />
+                  <span className="flex-1 text-center text-sm md:text-base">
+                    {label}
+                  </span>
                 </li>
               )}
             </Listbox.Option>

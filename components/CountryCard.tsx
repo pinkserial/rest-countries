@@ -3,12 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function CountryCard({
-  country: { flag, name, ...props },
+  country: { flag, name, alpha2Code, ...props },
 }: {
   country: Country;
 }) {
   return (
-    <Link href={`/country/${name}`}>
+    <Link href={`/country/${alpha2Code}`}>
       <figure className="w-full h-full">
         <Flag src={flag} alt={name} />
         <Summary name={name} {...props} />

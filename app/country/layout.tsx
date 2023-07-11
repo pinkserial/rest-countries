@@ -28,9 +28,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <div className="my-20">
+      <div className="my-10">
         <button
-          className="px-10 py-2 text-lg rounded-lg shadow-lg bg-card flex items-center gap-3"
+          className="px-10 py-2 text-sm md:text-lg rounded-lg shadow-lg bg-card flex items-center gap-3"
           type="button"
           onClick={router.back}
         >
