@@ -2,6 +2,7 @@ import { Nunito_Sans } from "next/font/google";
 import ThemeToggle from "@/components/ThemeToggle";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import "@/styles/globals.css";
+import Link from "next/link";
 
 const nunitoSans = Nunito_Sans({
   subsets: ["latin"],
@@ -23,7 +24,9 @@ export default function RootLayout({
       <body className={nunitoSans.className}>
         <ThemeProvider>
           <nav className="bg-card px-20 h-20 flex justify-between items-center shadow-lg">
-            <h1 className="text-2xl font-extrabold">Where in the world?</h1>
+            <Link href={"/"}>
+              <h1 className="text-2xl font-extrabold">Where in the world?</h1>
+            </Link>
             <ThemeToggle />
           </nav>
           <main className="px-20">{children}</main>

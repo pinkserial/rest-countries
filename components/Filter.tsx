@@ -1,8 +1,11 @@
 "use client";
 
+import capitalize from "@/lib/capitalize";
+import { Regions } from "@/lib/getCountries";
 import { Listbox } from "@headlessui/react";
 import clsx from "clsx";
-import { useState, Fragment } from "react";
+import { useRouter } from "next/navigation";
+import { Fragment } from "react";
 
 function FilterIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -24,19 +27,23 @@ function FilterIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-const regions = ["Africa", "America", "Asia", "Europe", "Oceania"];
+export default function Filter({ region }: { region?: string }) {
+  const router = useRouter();
 
-export default function Filter({}) {
-  const [selectedRegion, setSelectedRegion] = useState("");
+  const handleChange = (v: React.SetStateAction<string>) => {
+    router.push(`/region/${v.toString().toLowerCase()}`);
+  };
 
   return (
-    <Listbox value={selectedRegion} onChange={setSelectedRegion}>
+    <Listbox value={region} onChange={handleChange}>
       <Listbox.Button className="rounded-lg w-52 bg-card flex items-center px-5 shadow-lg">
-        <span className="flex-1">{selectedRegion || "Filter by Region"}</span>
+        <span className="flex-1">
+          {capitalize(region || "filter by region")}
+        </span>
         <FilterIcon className="h-auto stroke-foreground" />
       </Listbox.Button>
       <Listbox.Options className="mt-3 absolute w-52 top-full right-0 bg-card rounded-lg ring-1 ring-slate-900/10 shadow-lg overflow-hidden">
-        {regions.map((region) => (
+        {Regions.map((region) => (
           <Listbox.Option key={region} value={region} as={Fragment}>
             {({ active, selected }) => (
               <li
@@ -46,7 +53,9 @@ export default function Filter({}) {
                   active && "bg-slate-50 dark:bg-slate-600/30"
                 )}
               >
-                <span className="flex-1 text-center ">{region}</span>
+                <span className="flex-1 text-center ">
+                  {capitalize(region)}
+                </span>
               </li>
             )}
           </Listbox.Option>

@@ -2,9 +2,15 @@ import countries from "@/data.json";
 
 export type Country = (typeof countries)[number];
 
-type Region = "Asia" | "Africa" | "America" | "Europe" | "Oceania";
+export const Regions = [
+  "asia",
+  "africa",
+  "america",
+  "europe",
+  "oceania",
+] as const;
 
-const MAX_PAGE_NUM = Math.ceil(countries.length / 10);
+export type Region = (typeof Regions)[number];
 
 export function getCountry(name: string) {
   return countries.find((country) => country.name.includes(name));
@@ -17,8 +23,12 @@ export function searchCountriesByName(name: string) {
 }
 
 export function getCountriesByRegion(region: Region) {
-  return countries.filter((country) => country.region === region);
+  return countries.filter((country) =>
+    country.region.toLowerCase().includes(region)
+  );
 }
+
+const MAX_PAGE_NUM = Math.ceil(countries.length / 10);
 
 export function getCountriesByPageNum(pageNum: number) {
   if (pageNum === 0 || pageNum > MAX_PAGE_NUM) {

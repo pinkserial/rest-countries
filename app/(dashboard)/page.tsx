@@ -4,6 +4,9 @@ import CountryList from "@/components/CountryCardList";
 import { useRef, useState } from "react";
 import useCountries from "@/hooks/useCountries";
 
+import Filter from "@/components/Filter";
+import Search from "@/components/Search";
+
 export default function Home() {
   const [pageNum, setPageNum] = useState(1);
   const { countries, hasNext } = useCountries(pageNum);
@@ -23,5 +26,13 @@ export default function Home() {
     }
   };
 
-  return <CountryList ref={lastItemRef} countries={countries} />;
+  return (
+    <>
+      <div className="mt-10 h-14 flex justify-between relative">
+        <Search />
+        <Filter />
+      </div>
+      <CountryList ref={lastItemRef} countries={countries} />
+    </>
+  );
 }
