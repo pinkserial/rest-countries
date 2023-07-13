@@ -1,26 +1,28 @@
-"use client";
-
 import CountryCardList from "@/components/CountryCardList";
-import Filter from "@/components/Filter";
-import Search from "@/components/Search";
-import { searchCountriesByName } from "@/lib/getCountries";
-import { useSearchParams } from "next/navigation";
 
-export default function SearchPage() {
-  const params = useSearchParams();
-  const countries = searchCountriesByName(params.get("q") || "");
+async function getCountries(query: string) {
+  const response = await fetch(`${process.env.API_BASE_URL}/name/${query}`);
 
-  return (
-    <>
-      <div className="my-10 md:h-14 md:flex md:justify-between relative">
-        <Search />
-        <Filter />
-      </div>
-      {countries.length > 0 ? (
-        <CountryCardList countries={countries} />
-      ) : (
-        <h1>No search results</h1>
-      )}
-    </>
+  if (!response.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return response.json();
+}
+
+export default async function SearchPage({
+  searchParams,
+}: {
+  searchParams: {
+    q: string;
+  };
+}) {
+  const countries = await getCountries(searchParams.q);
+
+  return countries.length > 0 ? (
+    <CountryCardList countries={countries} />
+  ) : (
+    <h1>No search results</h1>
   );
 }

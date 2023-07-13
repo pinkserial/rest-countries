@@ -1,34 +1,42 @@
 import CountryCardList from "@/components/CountryCardList";
-import Filter from "@/components/Filter";
-import Search from "@/components/Search";
-import { Region, Regions, getCountriesByRegion } from "@/lib/getCountries";
-import { Suspense } from "react";
+import createUrl from "@/lib/createUrl";
+
+const regions = ["asia", "africa", "america", "europe", "oceania"] as const;
+
+type Region = (typeof regions)[number];
 
 export async function generateStaticParams() {
-  const regions = Regions;
   return regions.map((region) => ({
     name: region,
   }));
 }
 
-function SearchBarFallback() {
-  return <>Search Bar</>;
+async function getCountries(region: Region) {
+  const searchParams = new URLSearchParams({
+    fields: "name,population,region,capital,flags,cca3",
+  });
+
+  const response = await fetch(
+    createUrl(`${process.env.API_BASE_URL}/region/${region}`, searchParams)
+  );
+
+  if (!response.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return response.json();
 }
 
-export default function RegionPage({
+export default async function RegionPage({
   params: { name },
 }: {
   params: { name: Region };
 }) {
-  const countries = getCountriesByRegion(name);
+  const countries = await getCountries(name);
+
   return (
     <>
-      <div className="my-10 md:h-14 md:flex md:justify-between relative">
-        <Suspense fallback={<SearchBarFallback />}>
-          <Search />
-        </Suspense>
-        <Filter region={name} />
-      </div>
       <CountryCardList countries={countries} />
     </>
   );

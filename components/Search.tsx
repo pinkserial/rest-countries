@@ -50,7 +50,6 @@ export default function Search() {
       className="px-5 py-5 rounded-lg flex md:w-[300px] lg:w-[480px] h-full gap-2 bg-card shadow-lg"
     >
       <SearchIcon className="w-5 h-auto stroke-foreground" />
-      {/* <p className="border border-sky-600">ABC</p> */}
       <input
         className="flex-1 bg-card outline-none text-sm md:text-base"
         type="text"

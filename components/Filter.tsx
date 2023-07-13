@@ -1,10 +1,8 @@
 "use client";
 
-import capitalize from "@/lib/capitalize";
-import { Regions } from "@/lib/getCountries";
 import { Listbox } from "@headlessui/react";
 import clsx from "clsx";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Fragment } from "react";
 
 function FilterIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -27,24 +25,35 @@ function FilterIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-export default function Filter({ region }: { region?: string }) {
+const filterItem = [
+  { title: "Asia", value: "asia", path: "/region/asia" },
+  { title: "Africa", value: "africa", path: "/region/africa" },
+  { title: "America", value: "america", path: "/region/america" },
+  { title: "Europe", value: "europe", path: "/region/europe" },
+  { title: "Oceania", value: "oceania", path: "/region/oceania" },
+];
+
+export default function Filter() {
   const router = useRouter();
+  const pathname = usePathname();
+
+  const activeItem = filterItem.find((item) => item.path === pathname);
 
   const handleChange = (v: React.SetStateAction<string>) => {
     router.push(`/region/${v.toString().toLowerCase()}`);
   };
 
   return (
-    <Listbox value={region} onChange={handleChange}>
+    <Listbox value={activeItem?.value ?? ""} onChange={handleChange}>
       <Listbox.Button className="p-5 mt-10 md:mt-0 mx-auto md:mx-0 rounded-lg w-52 bg-card flex items-center shadow-lg">
         <span className="flex-1">
-          {capitalize(region || "filter by region")}
+          {activeItem?.title ?? "Filter by region"}
         </span>
         <FilterIcon className="h-auto stroke-foreground" />
       </Listbox.Button>
       <Listbox.Options className="mt-3 absolute top-full w-1/2 md:w-52 right-1/4 md:right-0 bg-card rounded-lg ring-1 ring-slate-900/10 shadow-lg overflow-hidden">
-        {Regions.map((region) => (
-          <Listbox.Option key={region} value={region} as={Fragment}>
+        {filterItem.map((item) => (
+          <Listbox.Option key={item.value} value={item.value} as={Fragment}>
             {({ active, selected }) => (
               <li
                 className={clsx(
@@ -53,9 +62,7 @@ export default function Filter({ region }: { region?: string }) {
                   active && "bg-slate-50 dark:bg-slate-600/30"
                 )}
               >
-                <span className="flex-1 text-center ">
-                  {capitalize(region)}
-                </span>
+                <span className="flex-1 text-center ">{item.title}</span>
               </li>
             )}
           </Listbox.Option>

@@ -1,17 +1,21 @@
-import { Country } from "@/lib/getCountries";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function CountryCard({
-  country: { flag, name, alpha2Code, ...props },
+  country: {
+    flags: { svg, alt },
+    name: { official },
+    cca3,
+    ...props
+  },
 }: {
-  country: Country;
+  country: CountrySummary;
 }) {
   return (
-    <Link href={`/country/${alpha2Code}`}>
+    <Link href={`/country/${cca3}`}>
       <figure className="w-full h-full">
-        <Flag src={flag} alt={name} />
-        <Summary name={name} {...props} />
+        <Flag src={svg} alt={alt} />
+        <Summary name={official} {...props} />
       </figure>
     </Link>
   );
@@ -33,13 +37,13 @@ type SummaryProps = {
   name: string;
   population: number;
   region: string;
-  capital?: string;
+  capital: string[];
 };
 
 function Summary({ name, population, region, capital }: SummaryProps) {
   return (
     <figcaption className="p-5">
-      <h3 className="text-lg font-bold">{name}</h3>
+      <h3 className="text-lg font-bold h-20">{name}</h3>
       <ol className="mt-3 text-sm">
         <li className="mt-1">
           <span className="font-bold">Population:</span>{" "}
@@ -48,9 +52,9 @@ function Summary({ name, population, region, capital }: SummaryProps) {
         <li className="mt-1">
           <span className="font-bold">Region:</span> {region}
         </li>
-        {capital && (
+        {capital.length > 0 && (
           <li className="mt-1">
-            <span className="font-bold">Capital:</span> {capital}
+            <span className="font-bold">Capital:</span> {capital.join(", ")}
           </li>
         )}
       </ol>
