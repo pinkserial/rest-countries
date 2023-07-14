@@ -1,4 +1,5 @@
 import CountryList from "@/components/CountryCardList";
+import SkeletonList from "@/components/Skeleton";
 import createUrl from "@/lib/createUrl";
 
 async function getAllCountries(): Promise<CountrySummary[]> {
@@ -27,33 +28,3 @@ export default async function Home() {
     </>
   );
 }
-
-// export default function Home() {
-//   const [pageNum, setPageNum] = useState(1);
-//   const { countries, hasNext } = useCountries(pageNum);
-
-//   const observer = useRef<IntersectionObserver | null>(null);
-//   const lastItemRef = (node: HTMLLIElement) => {
-//     observer.current?.disconnect();
-
-//     observer.current = new IntersectionObserver((entries) => {
-//       if (entries[0].isIntersecting && hasNext) {
-//         setPageNum((prev) => prev + 1);
-//       }
-//     });
-
-//     if (node) {
-//       observer.current.observe(node);
-//     }
-//   };
-
-//   return (
-//     <>
-//       <div className="my-10 md:h-14 md:flex md:justify-between relative">
-//         <Search />
-//         <Filter />
-//       </div>
-//       <CountryList ref={lastItemRef} countries={countries} />
-//     </>
-//   );
-// }
