@@ -10,7 +10,7 @@ async function getCountryNames(
   });
 
   const response = await fetch(
-    createUrl(`${process.env.API_BASE_URL}/alpha`, searchParams)
+    createUrl(`https://restcountries.com/v3.1/alpha`, searchParams)
   );
 
   if (!response.ok) {

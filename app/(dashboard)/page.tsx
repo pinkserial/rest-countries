@@ -8,7 +8,7 @@ async function getAllCountries(): Promise<CountrySummary[]> {
   });
 
   const response = await fetch(
-    createUrl(`${process.env.API_BASE_URL}/all`, searchParams)
+    createUrl(`https://restcountries.com/v3.1/all`, searchParams)
   );
 
   if (!response.ok) {

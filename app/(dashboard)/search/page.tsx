@@ -1,7 +1,7 @@
 import CountryCardList from "@/components/CountryCardList";
 
 async function getCountries(query: string) {
-  const response = await fetch(`${process.env.API_BASE_URL}/name/${query}`);
+  const response = await fetch(`https://restcountries.com/v3.1/name/${query}`);
 
   if (!response.ok) {
     // This will activate the closest `error.js` Error Boundary

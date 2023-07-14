@@ -17,7 +17,7 @@ async function getCountries(region: Region) {
   });
 
   const response = await fetch(
-    createUrl(`${process.env.API_BASE_URL}/region/${region}`, searchParams)
+    createUrl(`https://restcountries.com/v3.1/region/${region}`, searchParams)
   );
 
   if (!response.ok) {

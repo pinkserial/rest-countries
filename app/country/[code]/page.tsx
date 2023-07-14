@@ -9,7 +9,7 @@ async function getCountry(code: string): Promise<CountryDetail> {
   });
 
   const response = await fetch(
-    createUrl(`${process.env.API_BASE_URL}/alpha/${code}`, searchParams)
+    createUrl(`https://restcountries.com/v3.1/alpha/${code}`, searchParams)
   );
 
   if (!response.ok) {
