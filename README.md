@@ -30,7 +30,7 @@ This is a solution to the [REST Countries API with color theme switcher challeng
 ### Links
 
 - Solution URL: <https://github.com/pinkserial/rest-countries>
-- Live Site URL: <https://pinkserial.github.io/rest-countries>
+- Live Site URL: <https://rest-countries-eight-theta.vercel.app/>
 
 ## My process
 
